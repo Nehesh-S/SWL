@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Login Form</title>
+<style>
+    form {
+        width: 300px;
+        margin: 0 auto;
+    }
+    input {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+<form id="loginForm" onsubmit="return validateForm()">
+    <input type="text" id="username" placeholder="User Name">
+    <input type="password" id="password" placeholder="Password">
+    <input type="text" id="address" placeholder="Address">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="hobbies" placeholder="Hobbies">
+    <input type="date" id="dob" placeholder="Date of Birth">
+    <input type="text" id="country" placeholder="Country">
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+</form>
+
+<script>
+    function validateForm() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+        var hobbies = document.getElementById("hobbies").value;
+        var dob = document.getElementById("dob").value;
+        var country = document.getElementById("country").value;
+
+        var errorMessage = "";
+
+        if (username === "") {
+            errorMessage += "Username is required.\n";
+        }
+
+        if (password === "") {
+            errorMessage += "Password is required.\n";
+        }
+
+        if (address === "") {
+            errorMessage += "Address is required.\n";
+        }
+
+        if (phone === "") {
+            errorMessage += "Phone Number is required.\n";
+        } else if (!/^\d{10}$/.test(phone)) {
+            errorMessage += "Phone Number should be 10 digits.\n";
+        }
+
+        if (dob === "") {
+            errorMessage += "Date of Birth is required.\n";
+        }
+
+        if (country === "") {
+            errorMessage += "Country is required.\n";
+        }
+
+        if (errorMessage !== "") {
+            alert(errorMessage);
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+</body>
+</html>

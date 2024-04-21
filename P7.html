@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<style>
+  /* Basic styling for the form */
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  label, input {
+    display: block;
+    margin-bottom: 10px;
+  }
+  input[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  input[type="reset"] {
+    padding: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  input[type="reset"]:hover {
+    background-color: #a3020b;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<form id="loginForm" onsubmit="return validateForm()" onreset="resetForm()">
+  <label for="username">User Name:</label>
+  <input type="text" id="username" name="username">
+  <span id="usernameError" class="error"></span>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+  <span id="passwordError" class="error"></span>
+
+  <label for="address">Address:</label>
+  <input type="text" id="address" name="address">
+  <span id="addressError" class="error"></span>
+
+  <label for="phone">Phone Number:</label>
+  <input type="text" id="phone" name="phone">
+  <span id="phoneError" class="error"></span>
+
+  <label for="hobbies">Hobbies:</label>
+  <input type="text" id="hobbies" name="hobbies">
+  <span id="hobbiesError" class="error"></span>
+
+  <label for="dob">Date of Birth:</label>
+  <input type="text" id="dob" name="dob">
+  <span id="dobError" class="error"></span>
+
+  <label for="country">Country:</label>
+  <input type="text" id="country" name="country">
+  <span id="countryError" class="error"></span>
+
+  <input type="submit" value="Submit">
+  <input type="reset" value="Reset">
+</form>
+
+<script>
+function validateForm() {
+  // Get form inputs
+  var username = document.getElementById('username').value.trim();
+  var password = document.getElementById('password').value.trim();
+  var address = document.getElementById('address').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var hobbies = document.getElementById('hobbies').value.trim();
+  var dob = document.getElementById('dob').value.trim();
+  var country = document.getElementById('country').value.trim();
+
+  // Define regular expressions for validation
+  var phoneRegex = /^\d{10}$/;
+  var dobRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+  // Object to store errors
+  var errors = {};
+
+  // Validate each field
+  if (username === '') {
+    errors.username = 'Username is required';
+  }
+
+  if (password === '') {
+    errors.password = 'Password is required';
+  }
+
+  if (address === '') {
+    errors.address = 'Address is required';
+  }
+
+  if (!phoneRegex.test(phone)) {
+    errors.phone = 'Invalid phone number';
+  }
+
+  if (hobbies === '') {
+    errors.hobbies = 'Hobbies are required';
+  }
+
+  if (!dobRegex.test(dob)) {
+    errors.dob = 'Invalid date of birth (YYYY-MM-DD)';
+  }
+
+  if (country === '') {
+    errors.country = 'Country is required';
+  }
+
+  // Display errors if any
+  for (var key in errors) {
+    if (errors.hasOwnProperty(key)) {
+      document.getElementById(key + 'Error').innerHTML = errors[key];
+    }
+  }
+
+  // If there are errors, prevent form submission
+  if (Object.keys(errors).length > 0) {
+    return false;
+  }
+
+  // If no errors, allow form submission
+  return true;
+}
+
+function resetForm() {
+  // Clear error messages on form reset
+  var errorElements = document.getElementsByClassName('error');
+  for (var i = 0; i < errorElements.length; i++) {
+    errorElements[i].innerHTML = '';
+  }
+}
+</script>
+
+</body>
+</html>
