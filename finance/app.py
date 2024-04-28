@@ -34,7 +34,6 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
     lists = []
     total = 0
     portf = db.execute("SELECT * FROM portfolio WHERE user_id = ?", session.get("user_id"))
@@ -58,7 +57,6 @@ def index():
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
-    """Buy shares of stock"""
     if request.method == "GET":
         return render_template("buy.html")
 
@@ -102,14 +100,12 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
     hist = db.execute("SELECT * FROM history WHERE user_id = ?", session.get("user_id"))
     return render_template("history.html", hist=hist)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Log user in"""
 
     # Forget any user_id
     session.clear()
@@ -148,7 +144,6 @@ def login():
 
 @app.route("/logout")
 def logout():
-    """Log user out"""
 
     # Forget any user_id
     session.clear()
@@ -160,7 +155,6 @@ def logout():
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
-    """Get stock quote."""
     if request.method == "GET":
         return render_template("quote.html")
 
@@ -176,7 +170,6 @@ def quote():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    """Register user"""
     # Forget any user_id
     session.clear()
 
@@ -222,7 +215,6 @@ def register():
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
-    """Sell shares of stock"""
     if request.method == "GET":
         dicts = db.execute("SELECT * FROM portfolio WHERE user_id = ?", session.get("user_id"))
         return render_template("sell.html", dicts=dicts)
